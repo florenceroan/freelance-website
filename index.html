@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name · Medical & Scientific Writing</title>
+  <meta name="description" content="MD-PhD offering medical writing, CME content development, research support, and data visualization for medical education companies, nonprofits, and academic institutions." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ──────────────────────────────────────────────── */
+    :root {
+      --forest:   #2d4a3e;
+      --teal:     #3a6b6e;
+      --slate:    #4a5f74;
+      --accent:   #3a6b6e;        /* primary accent = teal */
+      --accent-lt:#eef4f4;        /* very light tint of accent */
+      --warm-white: #f8f6f1;
+      --off-white:  #f2efe8;
+      --stone:    #e8e3d9;
+      --text-dark: #1e2422;
+      --text-mid:  #455550;
+      --text-light:#7a8a85;
+      --footer-bg: #1a2420;
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+
+      --max-w: 1160px;
+      --nav-h: 68px;
+      --section-pad: 100px;
+      --transition: 0.3s ease;
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-padding-top: var(--nav-h); font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      color: var(--text-dark);
+      background: var(--warm-white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a  { color: inherit; text-decoration: none; }
+
+    /* ─── Typography ─────────────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.15; }
+    h1 { font-size: clamp(2.8rem, 5vw, 4.2rem); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
+    p  { font-size: 1.0125rem; color: var(--text-mid); max-width: 68ch; }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ─── Utility ────────────────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* ─── Navbar ─────────────────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(248, 246, 241, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--warm-white);
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+    }
+    #navbar.scrolled .nav-logo { color: var(--forest); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.25rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      position: relative;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    #navbar.scrolled .nav-links a { color: var(--text-mid); }
+    #navbar.scrolled .nav-links a:hover { color: var(--accent); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: #fff;
+      transition: all var(--transition);
+    }
+    #navbar.scrolled .hamburger span { background: var(--text-dark); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--forest);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--warm-white);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────────── */
+    #home {
+      position: relative;
+      height: 95vh;
+      min-height: 580px;
+      display: flex;
+      align-items: flex-end;
+      padding-top: calc(var(--nav-h) + 2rem);
+      padding-bottom: 6rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: 70% 55%;
+      background-attachment: fixed;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(20, 35, 30, 0.38) 0%,
+        rgba(20, 35, 30, 0.72) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      /* Prevent content from ever rising above the navbar */
+      margin-top: auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      color: #fff;
+      max-width: 14ch;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .hero-content h1 em { font-style: normal; font-weight: 600; }
+    .hero-desc {
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.82);
+      max-width: 50ch;
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2.25rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent);
+      transition: background var(--transition), color var(--transition);
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: #fff;
+    }
+    .btn-outline {
+      display: inline-block;
+      padding: 0.85rem 2.25rem;
+      background: transparent;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.5);
+      margin-left: 1rem;
+      transition: border-color var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.4);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+
+    /* ─── Section shared styles ──────────────────────────────────────── */
+    section { padding: var(--section-pad) 0; }
+
+    /* ─── About ──────────────────────────────────────────────────────── */
+    #about { background: var(--warm-white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text h2 { margin-bottom: 1.5rem; color: var(--forest); }
+    .about-text p  { margin-bottom: 1.25rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+
+    .about-photo-wrap {
+      position: relative;
+      background: rgba(45, 74, 62, 0.18); /* forest green tint */
+      padding: 1.5rem 2.5rem 0 1.5rem; /* flush at bottom, extra right padding */
+    }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+    /* Placeholder headshot */
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--stone);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--text-light);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+    .photo-placeholder svg { opacity: 0.35; }
+
+    /* ─── Divider with parallax ──────────────────────────────────────── */
+    .parallax-divider {
+      height: 380px;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+    }
+    .parallax-divider::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(20,35,30,0.55);
+    }
+    .divider-text {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .divider-text blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-style: italic;
+      font-weight: 300;
+      color: #fff;
+      max-width: 700px;
+      line-height: 1.4;
+    }
+    .divider-text blockquote cite {
+      display: block;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 1.25rem;
+    }
+
+    /* ─── Services ───────────────────────────────────────────────────── */
+    #services { background: var(--off-white); }
+    .services-header { margin-bottom: 4rem; }
+    .services-header h2 { color: var(--forest); margin-bottom: 1rem; }
+    .services-header p { max-width: 60ch; }
+
+    .service-block {
+      display: grid;
+      grid-template-columns: 1.2fr 360px;
+      gap: 5rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--stone);
+    }
+    .service-block:last-child { border-bottom: none; padding-bottom: 0; }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+
+    .service-text h3 {
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+    .service-intro {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      font-family: var(--serif);
+      max-width: 100%;
+    }
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .service-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+    }
+    .service-list li::before {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.52em;
+      flex-shrink: 0;
+    }
+
+    .service-img {
+      width: 100%;
+      aspect-ratio: 5/4;
+      object-fit: cover;
+      filter: grayscale(8%);
+    }
+    .service-img-placeholder {
+      width: 100%;
+      aspect-ratio: 5/4;
+      background: var(--stone);
+    }
+
+    /* ─── Expertise Pills ────────────────────────────────────────────── */
+    #expertise { background: var(--forest); padding: 100px 0; }
+    .expertise-inner { text-align: center; }
+    .expertise-inner h2 { color: rgba(255,255,255,0.92); margin-bottom: 0.75rem; }
+    .expertise-inner > p { margin: 0 auto 2.75rem; color: rgba(255,255,255,0.55); }
+
+    .pill-rows { display: flex; flex-direction: column; gap: 0.85rem; align-items: center; }
+    .pill-row  { display: flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center; }
+    .pill {
+      padding: 0.5rem 1.25rem;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.07);
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.06em;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .pill:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.4); }
+
+    /* ─── Portfolio ──────────────────────────────────────────────────── */
+    #portfolio { background: var(--off-white); }
+    .portfolio-header { margin-bottom: 3.5rem; }
+    .portfolio-header h2 { color: var(--forest); margin-bottom: 0.75rem; }
+
+    .portfolio-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--stone);
+      background: transparent;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--forest);
+      color: #fff;
+      border-color: var(--forest);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .port-card {
+      background: var(--warm-white);
+      border: 1px solid var(--stone);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      cursor: default;
+    }
+    .port-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(30,36,34,0.1);
+    }
+    .port-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--stone);
+      display: block;
+    }
+    .port-card-body { padding: 1.5rem; }
+    .port-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .port-card-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+    .port-card-body p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      max-width: 100%;
+    }
+    .port-authors {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-family: var(--serif);
+      font-style: italic;
+    }
+    .port-meta {
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-style: italic;
+      font-family: var(--serif);
+    }
+    .port-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: opacity var(--transition);
+    }
+    .port-link:hover { opacity: 0.7; }
+
+    /* Bibliography note */
+    .portfolio-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    .portfolio-note-link {
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: opacity var(--transition);
+    }
+    .portfolio-note-link:hover { opacity: 0.7; }
+
+    /* ─── Testimonials placeholder ───────────────────────────────────── */
+    .testimonial-section {
+      min-height: 380px;
+      background-image: url('images/testimonials-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .testimonial-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(18,32,28,0.68);
+    }
+    .testimonial-inner {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 2rem;
+      max-width: 800px;
+    }
+    .testimonial-inner .section-label { color: rgba(255,255,255,0.55); }
+    .testimonial-inner blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-inner cite {
+      display: block;
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .placeholder-testimonial-note {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── Contact ────────────────────────────────────────────────────── */
+    #contact { background: var(--warm-white); }
+    .contact-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-inner h2 { color: var(--forest); margin-bottom: 1.25rem; }
+    .contact-inner p { margin: 0 auto 1.25rem; font-size: 1.1rem; }
+    .contact-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .contact-link:hover {
+      color: var(--forest);
+      border-bottom-color: var(--forest);
+    }
+    .contact-divider {
+      color: var(--stone);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      background: var(--footer-bg);
+      padding: 3.5rem 0 2.5rem;
+    }
+    /* OPTION 1 — Centered rows, generous spacing */
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2.5rem;
+      padding: 1rem 0;
+    }
+    .footer-brand .nav-logo {
+      color: rgba(255,255,255,0.92);
+      font-size: 1.6rem;
+    }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.38);
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0 3.5rem;
+    }
+    .footer-nav a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .footer-nav a:hover {
+      color: rgba(255,255,255,0.95);
+      border-bottom-color: rgba(255,255,255,0.3);
+    }
+    .footer-contact {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0 3rem;
+    }
+    .footer-contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      transition: color var(--transition);
+      font-family: var(--sans);
+    }
+    .footer-contact-link:hover { color: rgba(255,255,255,0.9); }
+    .footer-contact-link svg { flex-shrink: 0; opacity: 0.7; }
+    .footer-contact-link:hover svg { opacity: 1; }
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      max-width: none;
+    }
+
+    /* ─── Fade-in on scroll ──────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      :root { --section-pad: 70px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-wrap { max-width: 380px; margin: 0 auto; }
+
+      .service-block { grid-template-columns: 1fr; gap: 2rem; }
+      .service-block.reverse { direction: ltr; }
+      .service-img, .service-img-placeholder { display: none; }
+
+      .contact-inner { text-align: center; }
+
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-inner { gap: 1.25rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
+
+      .parallax-divider { background-attachment: scroll; }
+      .hero-bg { background-attachment: scroll; }
+      .testimonial-section { background-attachment: scroll; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      h1 { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .btn-outline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navbar ─────────────────────────────────────────────────────── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo">Your Name, MD, PhD</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#home"      class="mobile-link">Home</a>
+    <a href="#about"     class="mobile-link">About</a>
+    <a href="#services"  class="mobile-link">Services</a>
+    <a href="#portfolio" class="mobile-link">Portfolio</a>
+    <a href="#contact"   class="mobile-link">Contact</a>
+  </div>
+
+  <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+  <section id="home" aria-label="Introduction">
+    <!-- IMAGE: hero.jpg · Stethoscope · Photographer: Hush Naidoo Jade Photography · https://unsplash.com/photos/black-and-gray-stethoscope-yo01Z-9HQAw -->
+    <div class="hero-bg" role="img" aria-label="Stethoscope on desk" style="background-image: url('images/hero.jpg');"></div>
+    <div class="hero-content container">
+      <p class="hero-eyebrow">Medical Writing · CME Development · Research Support</p>
+      <h1>Science <em>communicated</em> with precision and purpose</h1>
+      <p class="hero-desc">
+        As a clinician and researcher, I understand both the evidence and the people it's meant to reach.
+      </p>
+      <div>
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact"  class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── About ─────────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <span class="section-label">About</span>
+          <h2>Bridging Research, Education, and Practice</h2>
+          <p>
+            In graduate school, the questions that drew me to research were mechanistic ones: how systems work, how pathways connect. Clinical training expanded those questions. I found myself asking not just what the evidence shows, but what it means for the person in the room. Both frames inform how I approach medical and scientific communication. This is also what drew me to continuing medical education, where effective communication must do more than inform — it must engage, persuade, and drive meaningful change.
+          </p>
+          <p>
+            Language matters, not just for clarity, but also for who gets to be included in the conversation. I bring that same care to how I work with clients. I work collaboratively and with genuine investment, helping you close the gap between evidence and patient care.
+          </p>
+          <!-- Credentials list removed — covered by Expertise section pills and About prose -->
+        </div>
+
+        <div class="about-photo-wrap fade-in" style="transition-delay:0.15s">
+          <!-- IMAGE: headshot.png · Your own photo · Recommended: ~600×800px, transparent background -->
+          <img src="images/headshot.png" alt="Your Name, MD, PhD" class="about-photo" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Parallax Divider 1 ────────────────────────────────────────────── -->
+  <!-- IMAGE: divider-1.jpg · Wall of books / Library · Photographer: Janko Ferlic · https://unsplash.com/photos/photo-of-library-with-turned-on-lights-sfL_QOnmy00 -->
+  <div class="parallax-divider" style="background-image: url('images/divider-1.jpg');" role="presentation">
+    <div class="divider-text">
+      <blockquote>
+        Precise, evidence-based writing that serves the science and the people who depend on it.
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- ─── Services ──────────────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header fade-in">
+        <span class="section-label">Services</span>
+        <h2>How I can help</h2>
+        <p>I work with clients who need complex science communicated clearly for education, publications, or presentations.</p>
+      </div>
+
+      <!-- Service 1: CME Content Development -->
+      <div class="service-block fade-in">
+        <div class="service-text">
+          <h3>CME Content Development</h3>
+          <p class="service-intro">I create CME content grounded in instructional design and adult learning principles, focused on measurable outcomes. Whether developing a needs assessment or a slide deck, I apply an analytical lens to ensure each deliverable advances a defined educational outcome.</p>
+          <ul class="service-list">
+            <li>Needs assessments, gap analyses, and root cause analyses</li>
+            <li>Educational activities and patient cases</li>
+            <li>Slide decks</li>
+            <li>White papers</li>
+            <li>Outcomes reports</li>
+          </ul>
+        </div>
+        <div>
+          <!-- IMAGE: service-writing.jpg · Quill pen · Photographer: Aaron Burden · https://unsplash.com/photos/fountain-pen-on-black-lined-paper-y02jEX_B0O0 -->
+          <img
+            src="images/service-writing.jpg"
+            alt="CME content development"
+            class="service-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Service 2: Writing and Research Support -->
+      <div class="service-block reverse fade-in">
+        <div class="service-text">
+          <h3>Writing &amp; Research Support</h3>
+          <p class="service-intro">From manuscript preparation to early-stage study design, I support clinicians and researchers who need a collaborator with both scientific depth and practical experience.</p>
+          <ul class="service-list">
+            <li>Manuscript writing and submission</li>
+            <li>Study design guidance for retrospective, observational, and QI/QA projects</li>
+            <li>IRB and IACUC protocol preparation and submission support</li>
+            <li>Data management, preparation, and basic analysis</li>
+            <li>Data visualization for manuscripts and presentations</li>
+          </ul>
+        </div>
+        <div>
+          <!-- IMAGE: service-dataviz.jpg · Analytics dashboard · Photographer: Luke Chesser · https://unsplash.com/photos/graphs-of-performance-analytics-on-a-laptop-screen-JKUTrJ4vK00 -->
+          <img
+            src="images/service-dataviz.jpg"
+            alt="Writing and research support"
+            class="service-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Expertise Pills ───────────────────────────────────────────────── -->
+  <section id="expertise">
+    <div class="container">
+      <div class="expertise-inner fade-in">
+        <span class="section-label" style="color:rgba(255,255,255,0.4);">Areas of Expertise</span>
+        <h2>Deep domain knowledge</h2>
+        <p>Residency in internal medicine · fellowship in infectious diseases · immunology research</p>
+        <div class="pill-rows" role="list">
+          <div class="pill-row">
+            <span class="pill" role="listitem">Immunology</span>
+            <span class="pill" role="listitem">Autoimmunity</span>
+            <span class="pill" role="listitem">Allergy</span>
+            <span class="pill" role="listitem">Immuno-oncology</span>
+            <span class="pill" role="listitem">Infectious Diseases</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill" role="listitem">Internal Medicine</span>
+            <span class="pill" role="listitem">Pulmonology</span>
+            <span class="pill" role="listitem">Gastroenterology</span>
+            <span class="pill" role="listitem">Dermatology</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Portfolio ─────────────────────────────────────────────────────── -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="portfolio-header fade-in">
+        <span class="section-label">Portfolio</span>
+        <h2>Selected work</h2>
+        <p>Published research, writing samples, and projects.</p>
+        <div class="portfolio-filters" role="tablist" aria-label="Portfolio filter">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="cme"       role="tab" aria-selected="false">CME</button>
+          <button class="filter-btn" data-filter="research"  role="tab" aria-selected="false">Journal Publications</button>
+          <button class="filter-btn" data-filter="writing"   role="tab" aria-selected="false">Blog Posts &amp; Articles</button>
+        </div>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- ── CME (port-1 through port-3) ── -->
+
+        <!-- Card 1 — CME · Needs Assessment -->
+        <article class="port-card" data-category="cme">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-1.jpg') /* IMAGE: port-1.jpg · CME card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">CME · Needs Assessment</span>
+            <h3>CME Project Title or Topic Area</h3>
+            <p>Brief description of the CME initiative, target audience, and educational objectives being addressed.</p>
+            <p class="port-meta">Organization · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View sample →</a>
+          </div>
+        </article>
+
+        <!-- Card 2 — CME · Slide Deck -->
+        <article class="port-card" data-category="cme">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-2.jpg') /* IMAGE: port-2.jpg · CME card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">CME · Slide Deck</span>
+            <h3>CME Project Title or Topic Area</h3>
+            <p>Brief description of the CME initiative, target audience, and educational objectives being addressed.</p>
+            <p class="port-meta">Organization · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View sample →</a>
+          </div>
+        </article>
+
+        <!-- Card 3 — CME · White Paper -->
+        <article class="port-card" data-category="cme">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-3.jpg') /* IMAGE: port-3.jpg · CME card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">CME · White Paper</span>
+            <h3>CME Project Title or Topic Area</h3>
+            <p>Brief description of the CME initiative, target audience, and educational objectives being addressed.</p>
+            <p class="port-meta">Organization · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View sample →</a>
+          </div>
+        </article>
+
+        <!-- ── Journal Publications (port-4 through port-6) ── -->
+
+        <!-- Card 4 — Journal Publication -->
+        <article class="port-card" data-category="research">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-4.jpg') /* IMAGE: port-4.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Journal Publication</span>
+            <h3>Representative Manuscript Title</h3>
+            <p class="port-authors">Last A, Last B, Last C, et al.</p>
+            <p class="port-meta">Journal Name · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+          </div>
+        </article>
+
+        <!-- Card 5 — Journal Publication -->
+        <article class="port-card" data-category="research">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-5.jpg') /* IMAGE: port-5.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Journal Publication</span>
+            <h3>Representative Manuscript Title</h3>
+            <p class="port-authors">Last A, Last B, Last C, et al.</p>
+            <p class="port-meta">Journal Name · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+          </div>
+        </article>
+
+        <!-- Card 6 — Journal Publication -->
+        <article class="port-card" data-category="research">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-6.jpg') /* IMAGE: port-6.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Journal Publication</span>
+            <h3>Representative Manuscript Title</h3>
+            <p class="port-authors">Last A, Last B, Last C, et al.</p>
+            <p class="port-meta">Journal Name · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+          </div>
+        </article>
+
+        <!-- ── Blog Posts & Articles (port-7 through port-9) ── -->
+
+        <!-- Card 7 — Blog Post & Article -->
+        <article class="port-card" data-category="writing">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-7.jpg') /* IMAGE: port-7.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Blog Post &amp; Article</span>
+            <h3>Science Writing Sample Title</h3>
+            <p>Example of science or medicine writing for a general audience. Included to demonstrate clarity and accessibility.</p>
+            <p class="port-meta">Publication or Platform · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">Read article →</a>
+          </div>
+        </article>
+
+        <!-- Card 8 — Blog Post & Article -->
+        <article class="port-card" data-category="writing">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-8.jpg') /* IMAGE: port-8.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Blog Post &amp; Article</span>
+            <h3>Science Writing Sample Title</h3>
+            <p>Additional writing sample demonstrating ability to communicate technical content to non-specialist readers.</p>
+            <p class="port-meta">Publication or Platform · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">Read article →</a>
+          </div>
+        </article>
+
+        <!-- Card 9 — Blog Post & Article -->
+        <article class="port-card" data-category="writing">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-9.jpg') /* IMAGE: port-9.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
+            <span class="port-tag">Blog Post &amp; Article</span>
+            <h3>Science Writing Sample Title</h3>
+            <p>Additional writing sample demonstrating ability to communicate technical content to non-specialist readers.</p>
+            <p class="port-meta">Publication or Platform · Year</p>
+            <a href="#" class="port-link" target="_blank" rel="noopener">Read article →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="portfolio-note">
+        For a full list of scientific publications, see my
+        <a href="https://www.ncbi.nlm.nih.gov/myncbi/YOUR-NCBI-ID/bibliography/public/" target="_blank" rel="noopener" class="portfolio-note-link">NCBI bibliography</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── Testimonials Placeholder ─────────────────────────────────────── -->
+  <!-- IMAGE: testimonials-bg.jpg · Stack of books · Photographer: Alexander Grey · https://unsplash.com/photos/assorted-books-on-wooden-table-eMP4sYPJ9x0 -->
+  <div class="testimonial-section" role="region" aria-label="Testimonials">
+    <div class="testimonial-inner">
+      <span class="section-label">Testimonials</span>
+      <blockquote>
+        "Placeholder for client testimonial — a sentence or two about working with you, the quality of the work, and the outcome of the collaboration."
+      </blockquote>
+      <cite>Name, Title · Organization</cite>
+      <span class="placeholder-testimonial-note">[ Testimonial section — replace with client quotes when available ]</span>
+    </div>
+  </div>
+
+  <!-- ─── Contact ───────────────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner fade-in">
+        <span class="section-label">Contact</span>
+        <h2>Let's work together</h2>
+        <p>
+          I'm open to freelance projects, ongoing collaborations, and consulting arrangements. I work primarily with medical education companies, nonprofits, academic institutions, and early-stage investigators and clinician-researchers.
+        </p>
+        <p>
+          The best first step is a brief conversation about your project and timeline.<br />
+          Email is the best way to reach me.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="contact-link" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,14 22,4"/></svg>
+            your@email.com
+          </a>
+          <span class="contact-divider" aria-hidden="true">·</span>
+          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ────────────────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- Row 1: Name + tagline -->
+        <div class="footer-brand">
+          <span class="nav-logo">Your Name, MD, PhD</span>
+          <p class="footer-tagline">Medical &amp; Scientific Writing</p>
+        </div>
+
+        <!-- Row 2: Nav links -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Row 3: Contact links -->
+        <div class="footer-contact">
+          <!-- LinkedIn — icon only, universally recognised -->
+          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener" class="footer-contact-link" aria-label="LinkedIn profile">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:your@email.com" class="footer-contact-link" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="2,4 12,14 22,4"/>
+            </svg>
+            your@email.com
+          </a>
+          <!-- Phone — remove this block if not needed -->
+          <a href="tel:+10000000000" class="footer-contact-link" aria-label="Phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            +1 (000) 000-0000
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar: copyright + photo credit -->
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Your Name · All rights reserved</p>
+        <p style="color:rgba(255,255,255,0.28); font-size:0.75rem;">Photography: <a href="acknowledgments.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.38); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom:1px;">Unsplash photographers</a></p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ─── JavaScript ────────────────────────────────────────────────────── -->
+  <script>
+    /* ── Custom smooth scroll ── */
+    const NAV_H = parseInt(getComputedStyle(document.documentElement)
+                    .getPropertyValue('--nav-h')) || 68;
+
+    function easedScroll(targetY, duration) {
+      const startY = window.scrollY;
+      const diff   = targetY - startY;
+      let start    = null;
+
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function step(timestamp) {
+        if (!start) start = timestamp;
+        const elapsed  = timestamp - start;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + diff * easeInOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - NAV_H;
+        easedScroll(top, 900); // 900ms — adjust up for slower, down for faster
+      });
+    });
+
+    /* ── Navbar scroll state ── */
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Hamburger / mobile menu ── */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    const closeMenu = () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    /* ── Fade-in on scroll (IntersectionObserver) ── */
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => io.observe(el));
+
+    /* ── Portfolio filter ── */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.port-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    /* ── Footer year ── */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

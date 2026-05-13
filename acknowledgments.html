@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Credits · Your Name</title>
+  <meta name="description" content="Photography credits and acknowledgments for images used on this site." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --forest:     #2d4a3e;
+      --teal:       #3a6b6e;
+      --accent:     #3a6b6e;
+      --warm-white: #f8f6f1;
+      --off-white:  #f2efe8;
+      --stone:      #e8e3d9;
+      --text-dark:  #1e2422;
+      --text-mid:   #455550;
+      --text-light: #7a8a85;
+      --footer-bg:  #1a2420;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+      --max-w: 1160px;
+      --nav-h: 68px;
+      --transition: 0.3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-padding-top: var(--nav-h); }
+    body {
+      font-family: var(--sans);
+      color: var(--text-dark);
+      background: var(--warm-white);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100;
+      background: rgba(248, 246, 241, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing: 0.02em;
+    }
+    .nav-back {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color var(--transition);
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── Page header ── */
+    .page-header {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--stone);
+      margin-bottom: 4rem;
+    }
+    .page-header .section-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--forest);
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 60ch;
+    }
+
+    /* ── Credits table ── */
+    .credits-section {
+      padding-bottom: 6rem;
+    }
+    .credits-intro {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 60ch;
+    }
+
+    .credit-group {
+      margin-bottom: 3rem;
+    }
+    .credit-group-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--stone);
+    }
+
+    .credit-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 1rem 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--stone);
+      align-items: start;
+    }
+    .credit-row:last-child { border-bottom: none; }
+
+    .credit-file {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .credit-desc {
+      font-size: 0.9375rem;
+      color: var(--text-dark);
+    }
+    .credit-photographer {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+    .credit-photographer a {
+      color: var(--accent);
+      border-bottom: 1px solid rgba(58,107,110,0.3);
+      padding-bottom: 1px;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .credit-photographer a:hover {
+      color: var(--forest);
+      border-bottom-color: var(--forest);
+    }
+    .credit-unsplash {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+    .credit-unsplash a {
+      color: var(--text-light);
+      border-bottom: 1px solid var(--stone);
+      padding-bottom: 1px;
+      transition: color var(--transition);
+      word-break: break-all;
+    }
+    .credit-unsplash a:hover { color: var(--accent); }
+
+    /* ── Note ── */
+    .credits-note {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid var(--stone);
+      background: var(--off-white);
+    }
+    .credits-note p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      font-style: italic;
+      font-family: var(--serif);
+      max-width: 70ch;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--footer-bg);
+      padding: 2.5rem 0;
+    }
+    .footer-simple {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-simple p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.28);
+      max-width: none;
+    }
+    .footer-simple a {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      transition: color var(--transition);
+    }
+    .footer-simple a:hover { color: rgba(255,255,255,0.9); }
+
+    @media (max-width: 700px) {
+      .credit-row { grid-template-columns: 1fr; gap: 0.35rem; }
+      .credit-file { color: var(--accent); }
+      .footer-simple { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <span class="nav-logo" style="cursor:default;">Your Name</span>
+      <a href="#" onclick="window.close(); return false;" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <polyline points="15,18 9,12 15,6"/>
+        </svg>
+        Back to site
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <span class="section-label">Credits</span>
+        <h1>Photography Acknowledgments</h1>
+        <p>All photographs used on this site are sourced from <a href="https://unsplash.com" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid rgba(58,107,110,0.3); padding-bottom:1px;">Unsplash</a> and used in accordance with the <a href="https://unsplash.com/license" target="_blank" rel="noopener" style="color:var(--accent); border-bottom:1px solid rgba(58,107,110,0.3); padding-bottom:1px;">Unsplash License</a>. Individual photographers are credited below.</p>
+      </div>
+
+      <!-- Credits -->
+      <div class="credits-section">
+        <p class="credits-intro">Photographers are listed with links to their Unsplash profiles and the original image pages where available.</p>
+
+        <!-- Full-width images -->
+        <div class="credit-group">
+          <div class="credit-group-label">Full-width &amp; Background Images</div>
+
+          <div class="credit-row">
+            <span class="credit-file">hero.jpg</span>
+            <div>
+              <div class="credit-desc">Stethoscope</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@hush52" target="_blank" rel="noopener">Hush Naidoo Jade Photography</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/black-and-gray-stethoscope-yo01Z-9HQAw" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">divider-1.jpg</span>
+            <div>
+              <div class="credit-desc">Wall of books / Library</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@itfeelslikefilm" target="_blank" rel="noopener">Janko Ferlic</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/photo-of-library-with-turned-on-lights-sfL_QOnmy00" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">testimonials-bg.jpg</span>
+            <div>
+              <div class="credit-desc">Stack of books</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@sharonmccutcheon" target="_blank" rel="noopener">Alexander Grey</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/assorted-books-on-wooden-table-eMP4sYPJ9x0" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services images -->
+        <div class="credit-group">
+          <div class="credit-group-label">Services Section</div>
+
+          <div class="credit-row">
+            <span class="credit-file">service-writing.jpg</span>
+            <div>
+              <div class="credit-desc">Quill pen</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@aaronburden" target="_blank" rel="noopener">Aaron Burden</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/fountain-pen-on-black-lined-paper-y02jEX_B0O0" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">service-research.jpg</span>
+            <div>
+              <div class="credit-desc">Laboratory beakers</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@hansreniers" target="_blank" rel="noopener">Hans Reniers</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/three-clear-beakers-placed-on-tabletop-lQGJCMY5qcM" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">service-dataviz.jpg</span>
+            <div>
+              <div class="credit-desc">Analytics dashboard</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@lukechesser" target="_blank" rel="noopener">Luke Chesser</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/graphs-of-performance-analytics-on-a-laptop-screen-JKUTrJ4vK00" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio images -->
+        <div class="credit-group">
+          <div class="credit-group-label">Portfolio Section</div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-1.jpg</span>
+            <div>
+              <div class="credit-desc">Porch with ocean view</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@sasha_kaunas" target="_blank" rel="noopener">Sasha Kaunas</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/brown-wooden-lounge-chairs-on-brown-wooden-dock-during-daytime-xEaAoizNFV8" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-2.jpg</span>
+            <div>
+              <div class="credit-desc">Immunofluorescence microscopy image</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@nci" target="_blank" rel="noopener">National Cancer Institute</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/purple-cells-L7en7Lb-Ovc" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-3.jpg</span>
+            <div>
+              <div class="credit-desc">Melanoma cells</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@nci" target="_blank" rel="noopener">National Cancer Institute</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/a-close-up-of-a-cell-phone-case-sIqWYiNLiJU" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-4.jpg</span>
+            <div>
+              <div class="credit-desc">AI computer chip</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@omilaev" target="_blank" rel="noopener">Igor Omilaev</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/a-computer-chip-with-the-letter-a-on-top-of-it-eGGFZ5X2LnA" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-5.jpg</span>
+            <div>
+              <div class="credit-desc">Books, pencil, and stethoscope</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@bermixstudio" target="_blank" rel="noopener">Bermix Studio</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/a-stethoscope-sitting-on-top-of-a-pile-of-books-00heEp9LFP0" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+
+          <div class="credit-row">
+            <span class="credit-file">port-6.jpg</span>
+            <div>
+              <div class="credit-desc">Brain illustration</div>
+            </div>
+            <div class="credit-photographer">
+              <a href="https://unsplash.com/@fakurian" target="_blank" rel="noopener">Milad Fakurian</a>
+              <div class="credit-unsplash"><a href="https://unsplash.com/photos/blue-and-green-peacock-feather-58Z17lnVS4U" target="_blank" rel="noopener">View on Unsplash →</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Note -->
+        <div class="credits-note">
+          <p>This page is updated as images are added or changed. All images are used under the Unsplash License, which permits free use for commercial and non-commercial purposes without attribution required. Credits are provided here as a courtesy to the photographers whose work appears on this site.</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-simple">
+        <p>&copy; <span id="year"></span> Your Name · All rights reserved</p>
+        <a href="#" onclick="window.close(); return false;">← Back to main site</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
