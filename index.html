@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name · Medical & Scientific Writing</title>
+  <title>Florence Roan | Medical Writing · CME · Research Support</title>
   <meta name="description" content="MD-PhD offering medical writing, CME content development, research support, and data visualization for medical education companies, nonprofits, and academic institutions." />
 
   <!-- Google Fonts -->
@@ -414,7 +414,7 @@
     }
     .service-intro {
       font-size: 0.95rem;
-      color: var(--text-light);
+      color: var(--text-mid);
       margin-bottom: 1.5rem;
       font-style: italic;
       font-family: var(--serif);
@@ -436,8 +436,8 @@
     .service-list li::before {
       content: '';
       display: block;
-      width: 7px;
-      height: 7px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--accent);
       margin-top: 0.52em;
@@ -518,6 +518,8 @@
       border: 1px solid var(--stone);
       transition: transform 0.28s ease, box-shadow 0.28s ease;
       cursor: default;
+      display: flex;
+      flex-direction: column;
     }
     .port-card:hover {
       transform: translateY(-6px);
@@ -529,8 +531,14 @@
       object-fit: cover;
       background: var(--stone);
       display: block;
+    
     }
-    .port-card-body { padding: 1.5rem; }
+    .port-card-body { 
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
     .port-tag {
       font-size: 0.7rem;
       font-weight: 500;
@@ -546,38 +554,46 @@
       color: var(--text-dark);
     }
     .port-card-body p {
-      font-size: 0.875rem;
+      font-size: 0.85rem;        /* was 0.875rem */
+      font-family: var(--serif); /* added */  
+      font-style: italic;        /* added */
       color: var(--text-light);
       line-height: 1.6;
       max-width: 100%;
     }
     .port-authors {
       margin-top: 0.6rem;
-      font-size: 0.8rem;
-      color: var(--text-light);
+      font-size: 0.85rem;
       font-family: var(--serif);
       font-style: italic;
+      color: var(--text-light);
     }
-    .port-meta {
-      margin-top: 0.25rem;
-      font-size: 0.78rem;
-      color: var(--text-light);
-      font-style: italic;
-      font-family: var(--serif);
+    .port-card-body .port-meta {    /* was .port-meta */
+      margin-top: auto;             /* was 0.25rem — this pins it to bottom */
+      padding-top: 1rem;            /* added — space above meta */
+      font-size: 0.82rem;           /* was 0.78rem */
+      color: var(--text-mid);       /* was var(--text-light) */
+      font-family: var(--serif);    
+      font-style: normal;           /* was italic */
+      font-weight: 500; 
     }
     .port-link {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 0.6rem;
+      align-self: flex-start;
       font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      border-bottom: 1px solid var(--accent);
+      border-bottom: 1px solid transparent;        /* was 1px solid var(--accent) */
       padding-bottom: 1px;
-      transition: opacity var(--transition);
+      transition: color var(--transition), border-color var(--transition); /* was opacity */
     }
-    .port-link:hover { opacity: 0.7; }
+    .port-link:hover {
+      color: var(--forest);
+      border-bottom-color: var(--forest);
+    }                          /* replaces opacity: 0.7 */
 
     /* Bibliography note */
     .portfolio-note {
@@ -819,7 +835,7 @@
   <!-- ─── Navbar ─────────────────────────────────────────────────────── -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container nav-inner">
-      <a href="#home" class="nav-logo">Your Name, MD, PhD</a>
+      <a href="#home" class="nav-logo">Florence Roan, MD, PhD</a>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -847,7 +863,7 @@
     <!-- IMAGE: hero.jpg · Stethoscope · Photographer: Hush Naidoo Jade Photography · https://unsplash.com/photos/black-and-gray-stethoscope-yo01Z-9HQAw -->
     <div class="hero-bg" role="img" aria-label="Stethoscope on desk" style="background-image: url('images/hero.jpg');"></div>
     <div class="hero-content container">
-      <p class="hero-eyebrow">Medical Writing · CME Development · Research Support</p>
+      <p class="hero-eyebrow">Medical Writing <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> CME <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> Research Support</p>
       <h1>Science <em>communicated</em> with precision and purpose</h1>
       <p class="hero-desc">
         As a clinician and researcher, I understand both the evidence and the people it's meant to reach.
@@ -869,7 +885,7 @@
       <div class="about-grid">
         <div class="about-text fade-in">
           <span class="section-label">About</span>
-          <h2>Bridging Research, Education, and Practice</h2>
+          <h2>Bridging research, education, and practice</h2>
           <p>
             In graduate school, the questions that drew me to research were mechanistic ones: how systems work, how pathways connect. Clinical training expanded those questions. I found myself asking not just what the evidence shows, but what it means for the person in the room. Both frames inform how I approach medical and scientific communication. This is also what drew me to continuing medical education, where effective communication must do more than inform — it must engage, persuade, and drive meaningful change.
           </p>
@@ -881,7 +897,7 @@
 
         <div class="about-photo-wrap fade-in" style="transition-delay:0.15s">
           <!-- IMAGE: headshot.png · Your own photo · Recommended: ~600×800px, transparent background -->
-          <img src="images/headshot.png" alt="Your Name, MD, PhD" class="about-photo" />
+          <img src="images/headshot.png" alt="Florence Roan, MD, PhD" class="about-photo" />
         </div>
       </div>
     </div>
@@ -963,7 +979,7 @@
       <div class="expertise-inner fade-in">
         <span class="section-label" style="color:rgba(255,255,255,0.4);">Areas of Expertise</span>
         <h2>Deep domain knowledge</h2>
-        <p>Residency in internal medicine · fellowship in infectious diseases · immunology research</p>
+        <p>Internal medicine residency &nbsp;·&nbsp; infectious diseases fellowship &nbsp;·&nbsp; immunology research</p>
         <div class="pill-rows" role="list">
           <div class="pill-row">
             <span class="pill" role="listitem">Immunology</span>
@@ -1045,10 +1061,10 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-4.jpg') /* IMAGE: port-4.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Representative Manuscript Title</h3>
-            <p class="port-authors">Last A, Last B, Last C, et al.</p>
-            <p class="port-meta">Journal Name · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+            <h3>Profiling of Tregs across tissues reveals plasticity in ST2 expression and hierarchies in tissue-specific phenotypes</h3>
+            <p class="port-authors">Spath S<sup>*</sup>, Roan F<sup>*</sup>, Presnell SR, Höllbacher B, Ziegler SF <sup>*</sup>equal contribution</p>
+            <p class="port-meta">iScience · 2022</p>
+            <a href="https://www.cell.com/iscience/fulltext/S2589-0042(22)01270-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2589004222012706%3Fshowall%3Dtrue" class="port-link" target="_blank" rel="noopener">View publication →</a>
           </div>
         </article>
 
@@ -1057,10 +1073,10 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-5.jpg') /* IMAGE: port-5.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Representative Manuscript Title</h3>
-            <p class="port-authors">Last A, Last B, Last C, et al.</p>
-            <p class="port-meta">Journal Name · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+            <h3>Epithelial cell–derived cytokines: more than just signaling the alarm</h3>
+            <p class="port-authors">Roan F, Obata-Ninomiya K, Ziegler SF</p>
+            <p class="port-meta">Journal of Clinical Investigation · 2019</p>
+            <a href="https://www.jci.org/articles/view/124606" class="port-link" target="_blank" rel="noopener">View publication →</a>
           </div>
         </article>
 
@@ -1069,10 +1085,10 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-6.jpg') /* IMAGE: port-6.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Representative Manuscript Title</h3>
-            <p class="port-authors">Last A, Last B, Last C, et al.</p>
-            <p class="port-meta">Journal Name · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">View publication →</a>
+            <h3>Human group 1 innate lymphocytes are negative for surface CD3ε but express CD5</h3>
+            <p class="port-authors">Roan F, Ziegler SF</p>
+            <p class="port-meta">Immunity · 2017</p>
+            <a href="https://www.cell.com/immunity/fulltext/S1074-7613(17)30189-9" class="port-link" target="_blank" rel="noopener">View publication →</a>
           </div>
         </article>
 
@@ -1083,10 +1099,12 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-7.jpg') /* IMAGE: port-7.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Blog Post &amp; Article</span>
-            <h3>Science Writing Sample Title</h3>
-            <p>Example of science or medicine writing for a general audience. Included to demonstrate clarity and accessibility.</p>
-            <p class="port-meta">Publication or Platform · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">Read article →</a>
+            <h3>Tumor-infiltrating lymphocyte (TIL) therapy: mobilizing the body’s
+cancer fighters
+</h3>
+            <p>Overview of tumor infiltrating lymphocyte (TIL) therapy for a general audience.</p>
+            <p class="port-meta">OncoBites · 2026</p>
+            <a href="https://oncobites.blog/2026/05/13/tumor-infiltrating-lymphocyte-til-therapy-mobilizing-the-bodys-cancer-fighters/" class="port-link" target="_blank" rel="noopener">Read article →</a>
           </div>
         </article>
 
@@ -1095,10 +1113,10 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-8.jpg') /* IMAGE: port-8.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Blog Post &amp; Article</span>
-            <h3>Science Writing Sample Title</h3>
-            <p>Additional writing sample demonstrating ability to communicate technical content to non-specialist readers.</p>
-            <p class="port-meta">Publication or Platform · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">Read article →</a>
+            <h3>AI in medical writing: lessons from the field</h3>
+            <p>2025 AMWA conference coverage of the session "Snake Oil or Silver Bullet? Finding AI Tools You Can Trust."</p>
+            <p class="port-meta">Pacemaker Newsletter · 2026</p>
+            <a href="https://www.amwancal.org/newsletter-blog/ai-in-medical-writing-lessons-from-the-field" class="port-link" target="_blank" rel="noopener">Read article →</a>
           </div>
         </article>
 
@@ -1118,7 +1136,7 @@
 
       <p class="portfolio-note">
         For a full list of scientific publications, see my
-        <a href="https://www.ncbi.nlm.nih.gov/myncbi/YOUR-NCBI-ID/bibliography/public/" target="_blank" rel="noopener" class="portfolio-note-link">NCBI bibliography</a>.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/collections/65035840/?sort=pubdate" target="_blank" rel="noopener" class="portfolio-note-link">NCBI bibliography</a>.
       </p>
     </div>
   </section>
@@ -1155,7 +1173,7 @@
             your@email.com
           </a>
           <span class="contact-divider" aria-hidden="true">·</span>
-          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/florence-roan" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
@@ -1171,8 +1189,8 @@
 
         <!-- Row 1: Name + tagline -->
         <div class="footer-brand">
-          <span class="nav-logo">Your Name, MD, PhD</span>
-          <p class="footer-tagline">Medical &amp; Scientific Writing</p>
+          <span class="nav-logo">Florence Roan, MD, PhD</span>
+          <p class="footer-tagline">Medical Writing &nbsp;·&nbsp; CME &nbsp;·&nbsp; Research Support</p>
         </div>
 
         <!-- Row 2: Nav links -->
@@ -1187,7 +1205,7 @@
         <!-- Row 3: Contact links -->
         <div class="footer-contact">
           <!-- LinkedIn — icon only, universally recognised -->
-          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener" class="footer-contact-link" aria-label="LinkedIn profile">
+          <a href="https://www.linkedin.com/in/florence-roan" target="_blank" rel="noopener" class="footer-contact-link" aria-label="LinkedIn profile">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
@@ -1213,7 +1231,7 @@
 
       <!-- Bottom bar: copyright + photo credit -->
       <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> Your Name · All rights reserved</p>
+        <p>&copy; <span id="year"></span> Florence Roan · All rights reserved</p>
         <p style="color:rgba(255,255,255,0.28); font-size:0.75rem;">Photography: <a href="acknowledgments.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.38); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom:1px;">Unsplash photographers</a></p>
       </div>
 
