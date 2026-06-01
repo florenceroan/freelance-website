@@ -54,11 +54,11 @@
     h1 { font-size: clamp(2.8rem, 5vw, 4.2rem); letter-spacing: -0.01em; }
     h2 { font-size: clamp(2rem, 4vw, 3rem); }
     h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
-    p  { font-size: 1.0125rem; color: var(--text-mid); max-width: 68ch; }
+    p  { font-size: 1.0625rem; color: var(--text-mid); max-width: 68ch; }   /* was 1.0125rem */
 
     .section-label {
-      font-family: var(--sans);
-      font-size: 0.72rem;
+      font-family: var(--sans);    
+      font-size: 0.72rem;         
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -212,8 +212,8 @@
     }
     .hero-eyebrow {
       font-family: var(--sans);
-      font-size: 0.78rem;
-      font-weight: 500;
+      font-size: 0.8rem;          /* was 0.78rem */
+      font-weight: 550;           /* was 500 */
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
@@ -231,7 +231,7 @@
       font-family: var(--sans);
       font-size: 1.0625rem;
       color: rgba(255,255,255,0.82);
-      max-width: 50ch;
+      max-width: 42ch;                /* was 50ch */
       line-height: 1.65;
       margin-bottom: 2.5rem;
     }
@@ -413,11 +413,11 @@
       margin-bottom: 0.5rem;
     }
     .service-intro {
-      font-size: 0.95rem;
+      font-size: 1.05rem;   /* was 0.95rem */
       color: var(--text-mid);
       margin-bottom: 1.5rem;
       font-style: italic;
-      font-family: var(--serif);
+      font-family: var(--serif);   
       max-width: 100%;
     }
     .service-list {
@@ -554,16 +554,17 @@
       color: var(--text-dark);
     }
     .port-card-body p {
-      font-size: 0.85rem;        /* was 0.875rem */
+      margin-top: 0.6rem;
+      font-size: 0.875rem;        
       font-family: var(--serif); /* added */  
       font-style: italic;        /* added */
       color: var(--text-light);
       line-height: 1.6;
       max-width: 100%;
     }
-    .port-authors {
+    .port-card-body .port-authors { /* was .port-authors */
       margin-top: 0.6rem;
-      font-size: 0.85rem;
+      font-size: 0.875rem;
       font-family: var(--serif);
       font-style: italic;
       color: var(--text-light);
@@ -571,7 +572,7 @@
     .port-card-body .port-meta {    /* was .port-meta */
       margin-top: auto;             /* was 0.25rem — this pins it to bottom */
       padding-top: 1rem;            /* added — space above meta */
-      font-size: 0.82rem;           /* was 0.78rem */
+      font-size: 0.875rem;           /* was 0.78rem */
       color: var(--text-mid);       /* was var(--text-light) */
       font-family: var(--serif);    
       font-style: normal;           /* was italic */
@@ -1229,10 +1230,10 @@ cancer fighters
 
       </div>
 
-      <!-- Bottom bar: copyright + photo credit -->
+      <!-- Bottom bar: copyright + image credits -->
       <div class="footer-bottom">
         <p>&copy; <span id="year"></span> Florence Roan · All rights reserved</p>
-        <p style="color:rgba(255,255,255,0.28); font-size:0.75rem;"><a href="acknowledgments.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.38); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom:1px;">Photo credits</a></p>
+        <p style="color:rgba(255,255,255,0.28); font-size:0.75rem;"><a href="acknowledgments.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.38); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom:1px;">Image credits</a></p>
       </div>
 
     </div>
