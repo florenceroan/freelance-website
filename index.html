@@ -227,6 +227,17 @@
       font-style: italic;
     }
     .hero-content h1 em { font-style: normal; font-weight: 600; }
+
+    .hero-subtitle {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.88);
+  max-width: 52ch;
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+  }
+
     .hero-desc {
       font-family: var(--sans);
       font-size: 1.0625rem;
@@ -457,10 +468,18 @@
     }
 
     /* ─── Expertise Pills ────────────────────────────────────────────── */
-    #expertise { background: var(--forest); padding: 100px 0; }
+    #expertise { background: var(--forest); padding: 100px 0 50px; }
     .expertise-inner { text-align: center; }
     .expertise-inner h2 { color: rgba(255,255,255,0.92); margin-bottom: 0.75rem; }
     .expertise-inner > p { margin: 0 auto 2.75rem; color: rgba(255,255,255,0.55); }
+    .expertise-inner .expertise-note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2.75rem;
+      text-align: center;
+    }
 
     .pill-rows { display: flex; flex-direction: column; gap: 0.85rem; align-items: center; }
     .pill-row  { display: flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center; }
@@ -866,9 +885,12 @@
     <div class="hero-content container">
       <p class="hero-eyebrow">Medical Writing <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> CME <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> Research Support</p>
       <h1>Science <em>communicated</em> with precision and purpose</h1>
+      <p class="hero-subtitle">Medical writing and program support for clients in healthcare continuing professional development and clinical research</p>
+      <!-- 
       <p class="hero-desc">
         As a clinician and researcher, I understand both the evidence and the people it's meant to reach.
       </p>
+      -->
       <div>
         <a href="#services" class="btn-primary">Explore Services</a>
         <a href="#contact"  class="btn-outline">Get in Touch</a>
@@ -996,6 +1018,7 @@
             <span class="pill" role="listitem">Dermatology</span>
           </div>
         </div>
+            <p class="expertise-note">I also welcome projects in subject areas beyond these domains.</p>
       </div>
     </div>
   </section>
@@ -1024,10 +1047,10 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-1.jpg') /* IMAGE: port-1.jpg · CME card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">CME · Needs Assessment</span>
-            <h3>CME Project Title or Topic Area</h3>
-            <p>Brief description of the CME initiative, target audience, and educational objectives being addressed.</p>
-            <p class="port-meta">Organization · Year</p>
-            <a href="#" class="port-link" target="_blank" rel="noopener">View sample →</a>
+            <h3>Taming the Vicious Vortex: A Primer on Non-Cystic Fibrosis Bronchiectasis for the Primary Care Clinician</h3>
+            <p> Addresses gaps in early diagnosis and management of bronchiectasis among non-specialist clinicians.</p>
+            <p class="port-meta">2026</p>
+            <a href="https://drive.google.com/file/d/1dZx8jbvhRA_gqf-1adnCvqbBu4Rc0ohd/preview" class="port-link" target="_blank" rel="noopener">View sample →</a>
           </div>
         </article>
 
@@ -1062,7 +1085,7 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-4.jpg') /* IMAGE: port-4.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Profiling of Tregs across tissues reveals plasticity in ST2 expression and hierarchies in tissue-specific phenotypes</h3>
+            <h3>Profiling of Tregs Across Tissues Reveals Plasticity in ST2 Expression and Hierarchies in Tissue-Specific Phenotypes</h3>
             <p class="port-authors">Spath S<sup>*</sup>, Roan F<sup>*</sup>, Presnell SR, Höllbacher B, Ziegler SF <sup>*</sup>equal contribution</p>
             <p class="port-meta">iScience · 2022</p>
             <a href="https://www.cell.com/iscience/fulltext/S2589-0042(22)01270-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2589004222012706%3Fshowall%3Dtrue" class="port-link" target="_blank" rel="noopener">View publication →</a>
@@ -1074,7 +1097,7 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-5.jpg') /* IMAGE: port-5.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Epithelial cell–derived cytokines: more than just signaling the alarm</h3>
+            <h3>Epithelial Cell–Derived Cytokines: More Than Just Signaling the Alarm</h3>
             <p class="port-authors">Roan F, Obata-Ninomiya K, Ziegler SF</p>
             <p class="port-meta">Journal of Clinical Investigation · 2019</p>
             <a href="https://www.jci.org/articles/view/124606" class="port-link" target="_blank" rel="noopener">View publication →</a>
@@ -1086,7 +1109,7 @@
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-6.jpg') /* IMAGE: port-6.jpg · Journal publication card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
             <span class="port-tag">Journal Publication</span>
-            <h3>Human group 1 innate lymphocytes are negative for surface CD3ε but express CD5</h3>
+            <h3>Human Group 1 Innate Lymphocytes are Negative for Surface CD3ε but Express CD5</h3>
             <p class="port-authors">Roan F, Ziegler SF</p>
             <p class="port-meta">Immunity · 2017</p>
             <a href="https://www.cell.com/immunity/fulltext/S1074-7613(17)30189-9" class="port-link" target="_blank" rel="noopener">View publication →</a>
@@ -1099,9 +1122,9 @@
         <article class="port-card" data-category="writing">
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-7.jpg') /* IMAGE: port-7.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
-            <span class="port-tag">Blog Post &amp; Article</span>
-            <h3>Tumor-infiltrating lymphocyte (TIL) therapy: mobilizing the body’s
-cancer fighters
+            <span class="port-tag">Blog Post</span>
+            <h3>Tumor-Infiltrating Lymphocyte (TIL) Therapy: Mobilizing the Body’s
+Cancer Fighters
 </h3>
             <p>Overview of tumor infiltrating lymphocyte (TIL) therapy for a general audience.</p>
             <p class="port-meta">OncoBites · 2026</p>
@@ -1113,8 +1136,8 @@ cancer fighters
         <article class="port-card" data-category="writing">
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-8.jpg') /* IMAGE: port-8.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
-            <span class="port-tag">Blog Post &amp; Article</span>
-            <h3>AI in medical writing: lessons from the field</h3>
+            <span class="port-tag">Newsletter Article</span>
+            <h3>AI in Medical Writing: Lessons from the Field</h3>
             <p>2025 AMWA conference coverage of the session "Snake Oil or Silver Bullet? Finding AI Tools You Can Trust."</p>
             <p class="port-meta">Pacemaker Newsletter · 2026</p>
             <a href="https://www.amwancal.org/newsletter-blog/ai-in-medical-writing-lessons-from-the-field" class="port-link" target="_blank" rel="noopener">View article →</a>
@@ -1125,13 +1148,27 @@ cancer fighters
         <article class="port-card" data-category="writing">
           <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-9.jpg') /* IMAGE: port-9.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
           <div class="port-card-body">
+            <span class="port-tag">Magazine Article</span>
+            <h3>Science Writing Sample</h3>
+            <p>Coming Soon...</p>
+            <p class="port-meta">Science Connected Magazine</p>
+            <a href="https://magazine.scienceconnected.org" class="port-link" target="_blank" rel="noopener">View article →</a>
+          </div>
+        </article>
+
+        <!-- PLACEHOLDER FOR ADDITIONAL BLOG POSTS & ARTICLES 
+        -- Card X — Blog Post & Article
+        <article class="port-card" data-category="writing">
+          <div class="port-card-img" style="background:var(--stone); height:180px; background-image:url('images/port-9.jpg') /* IMAGE: port-9.jpg · Blog post card image */; background-size:cover; background-position:center;"></div>
+          <div class="port-card-body">
             <span class="port-tag">Blog Post &amp; Article</span>
             <h3>Science Writing Sample Title</h3>
             <p>Additional writing sample demonstrating ability to communicate technical content to non-specialist readers.</p>
             <p class="port-meta">Publication or Platform · Year</p>
             <a href="#" class="port-link" target="_blank" rel="noopener">View article →</a>
           </div>
-        </article>
+        </article> 
+      -->
 
       </div>
 
@@ -1166,7 +1203,7 @@ cancer fighters
         </p>
         <p>
           The best first step is a brief conversation about your project and timeline.<br />
-          Email is the best way to reach me.
+          Email me to get the conversation started.
         </p>
         <div class="contact-links">
           <a href="mailto:your@email.com" class="contact-link" aria-label="Email">
