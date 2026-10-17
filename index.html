@@ -172,10 +172,11 @@
       letter-spacing: 0.02em;
     }
 
-    /* ─── Hero ───────────────────────────────────────────────────────── */
+        /* ─── Hero ───────────────────────────────────────────────────────── */
     #home {
       position: relative;
       height: 95vh;
+      height: 95svh;           /* iOS toolbar-safe; ignored by older browsers */
       min-height: 580px;
       display: flex;
       align-items: flex-end;
@@ -185,20 +186,38 @@
     }
     .hero-bg {
       position: absolute;
-      inset: 0;
+      left: 0;
+      width: 100%;
+      top: -12%;      /* originally -10% */
+      height: 130%;   /* originally 120% */
       background-size: cover;
       background-position: 70% 40%;
-      background-attachment: fixed;
+      will-change: transform;
+      z-index: 0;
     }
-    .hero-bg::after {
+    /* Overlay lives on the section so it stays put while the image moves */
+    #home::after {
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 1;
       background: linear-gradient(
         to bottom,
         rgba(20, 35, 30, 0.38) 0%,
         rgba(20, 35, 30, 0.72) 100%
       );
+    }
+    /* Shared parallax image layer for divider + testimonial sections */
+    .parallax-bg {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      top: -40%;                    /* originally -25% */
+      height: 180%;                 /* originally 150% */
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      z-index: 0;
     }
     .hero-content {
       position: relative;
@@ -358,10 +377,7 @@
 
     /* ─── Divider with parallax ──────────────────────────────────────── */
     .parallax-divider {
-      height: 380px;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      height: 380px;    /* deleted background-size, -position, -attachment for iOS edit*/
       position: relative;
       overflow: hidden;
     }
@@ -634,16 +650,13 @@
 
     /* ─── Testimonials placeholder ───────────────────────────────────── */
     .testimonial-section {
-      min-height: 380px;
-      background-image: url('images/testimonials-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      min-height: 380px;  /* deleted background-image, -size, -position, -attachment for iOS edit */
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      overflow: hidden;
     }
     .testimonial-section::after {
       content: '';
@@ -836,9 +849,6 @@
       .footer-inner { gap: 1.25rem; }
       .footer-bottom { flex-direction: column; gap: 0.5rem; }
 
-      .parallax-divider { background-attachment: scroll; }
-      .hero-bg { background-attachment: scroll; }
-      .testimonial-section { background-attachment: scroll; }
     }
 
     @media (max-width: 640px) {
@@ -881,7 +891,7 @@
   <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
   <section id="home" aria-label="Introduction">
     <!-- IMAGE: hero.jpg · Stethoscope · Photographer: Hush Naidoo Jade Photography · https://unsplash.com/photos/black-and-gray-stethoscope-yo01Z-9HQAw -->
-    <div class="hero-bg" role="img" aria-label="Stethoscope on desk" style="background-image: url('images/hero.jpg');"></div>
+    <div class="hero-bg" data-parallax data-speed="0.22" role="img" aria-label="Stethoscope on desk" style="background-image: url('images/hero.jpg');"></div>
     <div class="hero-content container">
       <p class="hero-eyebrow">Medical Writing <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> CME <span style="font-size:1.2em; vertical-align:-0.05em;">·</span> Research Support</p>
       <h1>Science <em>communicated</em> with precision and purpose</h1>
@@ -928,7 +938,8 @@
 
   <!-- ─── Parallax Divider 1 ────────────────────────────────────────────── -->
   <!-- IMAGE: divider-1.jpg · Wall of books / Library · Photographer: Janko Ferlic · https://unsplash.com/photos/photo-of-library-with-turned-on-lights-sfL_QOnmy00 -->
-  <div class="parallax-divider" style="background-image: url('images/divider-1.jpg');" role="presentation">
+  <div class="parallax-divider" role="presentation">
+    <div class="parallax-bg" data-parallax style="background-image: url('images/divider-1.jpg');"></div>
     <div class="divider-text">
       <blockquote>
         Precise, evidence-based writing that serves the science and the people who depend on it.
@@ -1182,6 +1193,7 @@ Cancer Fighters
   <!-- ─── Testimonials Placeholder ─────────────────────────────────────── -->
   <!-- IMAGE: testimonials-bg.jpg · Stack of books · Photographer: Alexander Grey · https://unsplash.com/photos/assorted-books-on-wooden-table-eMP4sYPJ9x0 -->
   <div class="testimonial-section" role="region" aria-label="Testimonials">
+    <div class="parallax-bg" data-parallax style="background-image: url('images/testimonials-bg.jpg');"></div>
     <div class="testimonial-inner">
       <span class="section-label">Testimonials</span>
       <blockquote>
@@ -1368,6 +1380,37 @@ Cancer Fighters
         });
       });
     });
+
+    /* ── Parallax (iOS-safe) ── */
+const parallaxLayers = document.querySelectorAll('[data-parallax]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let parallaxTicking = false;
+
+function updateParallax() {
+  const vh = window.innerHeight;
+  parallaxLayers.forEach(layer => {
+    const parent = layer.parentElement;
+    const rect = parent.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > vh) return;
+    const speed = parseFloat(layer.dataset.speed) || 0.25;
+    const slack = (layer.offsetHeight - parent.offsetHeight) / 2;
+    let offset = (rect.top + rect.height / 2 - vh / 2) * -speed;
+    offset = Math.max(-slack, Math.min(slack, offset));
+    layer.style.transform = `translate3d(0, ${offset}px, 0)`;
+  });
+  parallaxTicking = false;
+}
+
+if (!reduceMotion) {
+  window.addEventListener('scroll', () => {
+    if (!parallaxTicking) {
+      requestAnimationFrame(updateParallax);
+      parallaxTicking = true;
+    }
+  }, { passive: true });
+  window.addEventListener('resize', updateParallax);
+  updateParallax();
+}
 
     /* ── Footer year ── */
     document.getElementById('year').textContent = new Date().getFullYear();
